@@ -1,0 +1,55 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+    width: 960px;
+    margin: auto;
+}
+
+md-toolbar .md-tool {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+md-toolbar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+md-icon {
+    color: #757575;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.error {
+    padding: 5px;
+    border: 1px solid red;
+    color: red;
+    background: rgba(255, 0, 0, 0.25);
+}
+
+h1 {
+    margin: 1% 2%;
+}
+
+button.mat-mini-fab {
+    position: fixed;
+    top: 65px;
+    right: 2%;
+}
+
+.mat-input-placeholder.mat-focused {
+    color: #69f0ae;
+}
+
+span.mat-input-ripple.mat-focused {
+    background-color: #69f0ae;
+}
