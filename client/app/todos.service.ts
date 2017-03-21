@@ -7,6 +7,9 @@ export class TodosService {
 
     private static storage: StorageService;
     private static todos: Todo[];
+    private proxyHandler = {
+        set: this.save.bind(this)
+    };
 
     constructor () {
         if(!TodosService.storage) {
@@ -14,18 +17,24 @@ export class TodosService {
         }
     }
 
+    create(todo: Todo): Todo {
+        return new Proxy(todo, this.proxyHandler);
+    }
+
     getTodos(): Todo[] {
         if(!TodosService.todos) {
             TodosService.todos = TodosService.storage.getAll() || [];
-            TodosService.todos.forEach(todo => {
+            TodosService.todos = TodosService.todos.map(todo => {
                 todo.completed = todo.completed || false;
                 todo.deadline = new Date(todo.deadline);
+
+                return this.create(todo);
             });
         }
         return [].concat(TodosService.todos);
     }
 
-    addTodo(todo: Todo): TodosService {
+    private addTodo(todo: Todo): TodosService {
         TodosService.storage.set(todo.id, todo);
         if(!TodosService.todos) {
             this.getTodos();
@@ -34,9 +43,23 @@ export class TodosService {
         return this;
     }
 
-    updateTodo(todo: Todo): TodosService {
+    private updateTodo(todo: Todo): TodosService {
         TodosService.storage.set(todo.id, todo);
         return this;
+    }
+
+
+    save(todo: Todo, prop: string = '', value: any): boolean {
+        if(prop) {
+            todo[prop] = value;
+        }
+        if(todo.id) {
+            this.updateTodo(todo);
+        } else {
+            todo.id = Date.now().toString();
+            this.addTodo(todo);
+        }
+        return true;
     }
 
     removeTodo(todo: Todo): TodosService {

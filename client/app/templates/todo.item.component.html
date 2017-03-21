@@ -7,7 +7,7 @@
         </md-input-container>
     </md-card-title>
     <md-card-actions>
-        <material-datepicker [(date)]="todo.deadline" (onSelect)="changeTodoDeadline($event)"></material-datepicker>
+        <material-datepicker [date]="todo.deadline" (onSelect)="changeTodoDeadline($event)"></material-datepicker>
         <md-checkbox [checked]="todo.completed" (change)="toggleCompleted($event.checked)" aria-label="Completed?">
             Completed?
         </md-checkbox>

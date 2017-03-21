@@ -10,8 +10,9 @@ import {TodosComponent} from './todos.component';
 import {TodoItemComponent} from "./todo.item.component";
 
 const routes = [
-    {path: '', redirectTo: '/todos', pathMatch: 'full'},
-    {path: 'todos', component: TodosComponent},
+    {path: '', redirectTo: '/active', pathMatch: 'full'},
+    {path: 'active', component: TodosComponent},
+    {path: 'completed', component: TodosComponent},
 ];
 
 @NgModule({

@@ -1,6 +1,5 @@
-
 <todo-item [todo]="todo" (update)="onChange($event)" *ngFor="let todo of todos"></todo-item>
 
-<button md-mini-fab (click)="addTodo()">
+<button *ngIf="type === 'active'" md-mini-fab (click)="addTodo()">
     <md-icon class="md-24">add</md-icon>
 </button>

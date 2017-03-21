@@ -13,21 +13,12 @@ export class TodoItemComponent implements OnInit {
 
     @Input() todo: Todo;
     @Output() update: EventEmitter<string> = new EventEmitter<string>();
-    private subject = new Subject<KeyboardEvent>();
 
     public isNew: boolean;
     public editMode: boolean;
+    private subject: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 
     constructor (private service: TodosService){}
-
-    private save(): void {
-        if(this.todo.id) {
-            this.service.updateTodo(this.todo);
-        } else {
-            this.todo.id = Date.now().toString();
-            this.service.addTodo(this.todo);
-        }
-    }
 
     ngOnInit() {
         this.isNew = !(this.todo && this.todo.id);
@@ -42,7 +33,6 @@ export class TodoItemComponent implements OnInit {
             .map($event => {return $event.srcElement})
             .subscribe((target: HTMLInputElement) => {
                 this.todo.content = target.value;
-                this.save();
                 this.editMode = false;
                 this.update.emit('content');
         });
@@ -51,11 +41,11 @@ export class TodoItemComponent implements OnInit {
         this.subject
             .filter($event => {return $event.keyCode === 27})
             .subscribe(() => this.editMode = false);
+
     }
 
     toggleCompleted(completed: boolean): void {
         this.todo.completed = completed;
-        this.save();
         this.update.emit('completed');
     }
 
@@ -63,12 +53,10 @@ export class TodoItemComponent implements OnInit {
         this.subject.next($event);
     }
 
-    changeTodoDeadline(date: Date): void {
+    changeTodoDeadline(date: Date) : void {
         this.todo.deadline = date;
-        this.save();
         this.update.emit('deadline');
     }
-
 
     removeTodo() : void {
         this.service.removeTodo(this.todo);

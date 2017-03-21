@@ -53,3 +53,16 @@ button.mat-mini-fab {
 span.mat-input-ripple.mat-focused {
     background-color: #69f0ae;
 }
+
+.mat-button-toggle {
+    color: #000;
+}
+
+nav a.active {
+    border-bottom: 2px solid #686868;
+}
+
+nav a {
+    text-decoration: none;
+    color: #686868;
+}
