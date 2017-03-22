@@ -12,9 +12,7 @@ export class TodosService {
     };
 
     constructor () {
-        if(!this.storage) {
-            this.storage = new StorageService('todos');
-        }
+        this.storage = new StorageService('todos');
     }
 
     create(todo: Todo): Todo {
@@ -23,23 +21,23 @@ export class TodosService {
 
     getTodos(): Todo[] {
         if(!this.todos) {
-            this.todos = this.storage.getAll() || [];
-            this.todos = this.todos.map(todo => {
+            this.todos = this.storage.getAll().map(todo => {
                 todo.completed = todo.completed || false;
                 todo.deadline = new Date(todo.deadline);
 
                 return this.create(todo);
             });
         }
-        return [].concat(this.todos);
+        return [...this.todos];
     }
 
     private addTodo(todo: Todo): TodosService {
         this.storage.set(todo.id, todo);
-        if(!this.todos) {
+        if(this.todos) {
+            this.todos.unshift(todo);
+        } else {
             this.getTodos();
         }
-        this.todos.unshift(todo);
         return this;
     }
 
