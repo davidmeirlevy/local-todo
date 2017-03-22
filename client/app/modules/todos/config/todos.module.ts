@@ -7,12 +7,8 @@ import {FormsModule} from '@angular/forms';
 
 import {TodosComponent} from '../components/todos.component';
 import {TodoItemComponent} from '../components/todo.item.component';
+import {routes} from './todos.routes';
 
-const routes = [
-    {path: '', redirectTo: '/active', pathMatch: 'full'},
-    {path: 'active', component: TodosComponent},
-    {path: 'completed', component: TodosComponent},
-];
 
 @NgModule({
     imports: [
