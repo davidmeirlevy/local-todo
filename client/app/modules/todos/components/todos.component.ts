@@ -30,9 +30,8 @@ export class TodosComponent implements OnInit {
         this.filterTodos(this.service.getTodos());
     }
 
-    private filterTodos(todos: Todo[]|undefined): Todo[] {
-        return this.todos = (todos || this.todos)
-            .filter(todo => {return (this.type === 'completed') ? todo.completed : !todo.completed});
+    private filterTodos(todos: Todo[] = this.todos): Todo[] {
+        return this.todos = todos.filter(todo => {return (this.type === 'completed') ? todo.completed : !todo.completed});
     }
 
     ngOnInit() {

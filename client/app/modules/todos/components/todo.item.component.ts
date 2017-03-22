@@ -1,5 +1,4 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Subject} from "rxjs/Rx";
 
 import {TodosService} from '../services/todos.service';
 import {Todo} from '../models/todo';
@@ -15,7 +14,6 @@ export class TodoItemComponent implements OnInit {
 
     public isNew: boolean;
     public editMode: boolean;
-    private subject: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 
     constructor (private service: TodosService){}
 
@@ -25,21 +23,6 @@ export class TodoItemComponent implements OnInit {
         if(this.isNew) {
             this.editMode = true;
         }
-
-        // set value on enter
-        this.subject
-            .filter($event => {return $event.keyCode === 13})
-            .map($event => {return $event.srcElement})
-            .subscribe((target: HTMLInputElement) => {
-                this.todo.content = target.value;
-                this.editMode = false;
-                this.update.emit('content');
-        });
-
-        // abort edit mode on esc
-        this.subject
-            .filter($event => {return $event.keyCode === 27})
-            .subscribe(() => this.editMode = false);
     }
 
     toggleCompleted(completed: boolean): void {
@@ -48,7 +31,13 @@ export class TodoItemComponent implements OnInit {
     }
 
     changeTodoContent($event: KeyboardEvent): void {
-        this.subject.next($event);
+        this.todo.content = (<HTMLInputElement>$event.target).value;
+        this.update.emit('content');
+        this.setEditMode(false);
+    }
+
+    setEditMode(editMode: boolean): void {
+        this.editMode = editMode;
     }
 
     changeTodoDeadline(date: Date) : void {

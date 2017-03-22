@@ -1,9 +1,9 @@
 <md-card>
     <md-card-title>
-        <span *ngIf="!editMode" (click)="editMode = true">{{todo.content}}</span>
+        <span *ngIf="!editMode" (click)="setEditMode(true)">{{todo.content || '[TODO: Write a Todo]'}}</span>
         <md-input-container class="full-width" *ngIf="editMode">
             <input mdInput input-focus placeholder="Your Task"
-                   [value]="todo.content" (keyup)="changeTodoContent($event)">
+                   [value]="todo.content" (keyup.enter)="changeTodoContent($event)" (keyup.esc)="setEditMode(false)">
         </md-input-container>
     </md-card-title>
     <md-card-actions *ngIf="todo && todo.id">
