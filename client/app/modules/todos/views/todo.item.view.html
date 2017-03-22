@@ -6,7 +6,7 @@
                    [value]="todo.content" (keyup)="changeTodoContent($event)">
         </md-input-container>
     </md-card-title>
-    <md-card-actions>
+    <md-card-actions *ngIf="todo && todo.id">
         <material-datepicker [date]="todo.deadline" (onSelect)="changeTodoDeadline($event)"></material-datepicker>
         <md-checkbox [checked]="todo.completed" (change)="toggleCompleted($event.checked)" aria-label="Completed?">
             Completed?

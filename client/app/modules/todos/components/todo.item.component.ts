@@ -1,12 +1,12 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Subject} from "rxjs/Rx";
 
-import {TodosService} from './todos.service';
-import {Todo} from './todo';
+import {TodosService} from '../services/todos.service';
+import {Todo} from '../models/todo';
 
 @Component({
     selector: 'todo-item',
-    templateUrl: '/app/templates/todo.item.component.html',
+    templateUrl: '/app/modules/todos/views/todo.item.view.html',
     providers: [TodosService]
 })
 export class TodoItemComponent implements OnInit {

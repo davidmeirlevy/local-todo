@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Subject, Observable} from "rxjs/Rx";
+import {Subject} from "rxjs/Rx";
 
-import {TodosService} from './todos.service';
-import {Todo} from './todo';
+import {TodosService} from '../services/todos.service';
+import {Todo} from '../models/todo';
 
 @Component({
     selector: 'todos',
-    templateUrl: '/app/templates/todos.component.html',
+    templateUrl: '/app/modules/todos/views/todos.view.html',
     providers: [TodosService]
 })
 export class TodosComponent implements OnInit {

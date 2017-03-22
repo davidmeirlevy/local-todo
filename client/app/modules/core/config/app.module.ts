@@ -5,28 +5,21 @@ import { DatepickerModule } from 'angular2-material-datepicker';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
-import {AppComponent} from './app.component';
-import {TodosComponent} from './todos.component';
-import {TodoItemComponent} from "./todo.item.component";
+import {AppComponent} from '../components/app.component';
+import {TodosModule} from "../../todos/config/todos.module";
 
-const routes = [
-    {path: '', redirectTo: '/active', pathMatch: 'full'},
-    {path: 'active', component: TodosComponent},
-    {path: 'completed', component: TodosComponent},
-];
 
 @NgModule({
     imports: [
         BrowserModule,
         MaterialModule,
         DatepickerModule,
+        RouterModule.forRoot([]),
         FormsModule,
-        RouterModule.forRoot(routes),
+        TodosModule
     ],
     declarations: [
-        AppComponent,
-        TodosComponent,
-        TodoItemComponent,
+        AppComponent
     ],
     bootstrap: [AppComponent]
 })

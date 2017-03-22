@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Todo} from "./todo";
-import {StorageService} from  './storage.service';
+import {Todo} from "../models/todo";
+import {StorageService} from  '../../core/services/storage.service';
 
 @Injectable()
 export class TodosService {
