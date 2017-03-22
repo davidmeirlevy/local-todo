@@ -2,7 +2,7 @@
     <md-card-title>
         <span *ngIf="!editMode" (click)="editMode = true">{{todo.content}}</span>
         <md-input-container class="full-width" *ngIf="editMode">
-            <input mdInput placeholder="Your Task"
+            <input mdInput input-focus placeholder="Your Task"
                    [value]="todo.content" (keyup)="changeTodoContent($event)">
         </md-input-container>
     </md-card-title>

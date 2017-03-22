@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 
 import {TodosComponent} from '../components/todos.component';
 import {TodoItemComponent} from '../components/todo.item.component';
+import {InputFocusDirective} from '../directives/input.focus.directive';
 import {routes} from './todos.routes';
 import {TodosService} from "../services/todos.service";
 
@@ -22,6 +23,7 @@ import {TodosService} from "../services/todos.service";
     declarations: [
         TodosComponent,
         TodoItemComponent,
+        InputFocusDirective
     ],
     providers: [TodosService]
 })
