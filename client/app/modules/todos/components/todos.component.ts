@@ -8,7 +8,6 @@ import {Todo} from '../models/todo';
 @Component({
     selector: 'todos',
     templateUrl: '/app/modules/todos/views/todos.view.html',
-    providers: [TodosService]
 })
 export class TodosComponent implements OnInit {
 

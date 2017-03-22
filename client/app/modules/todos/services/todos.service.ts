@@ -5,15 +5,15 @@ import {StorageService} from  '../../core/services/storage.service';
 @Injectable()
 export class TodosService {
 
-    private static storage: StorageService;
-    private static todos: Todo[];
+    private storage: StorageService;
+    private todos: Todo[];
     private proxyHandler = {
         set: this.save.bind(this)
     };
 
     constructor () {
-        if(!TodosService.storage) {
-            TodosService.storage = new StorageService('todos');
+        if(!this.storage) {
+            this.storage = new StorageService('todos');
         }
     }
 
@@ -22,29 +22,29 @@ export class TodosService {
     }
 
     getTodos(): Todo[] {
-        if(!TodosService.todos) {
-            TodosService.todos = TodosService.storage.getAll() || [];
-            TodosService.todos = TodosService.todos.map(todo => {
+        if(!this.todos) {
+            this.todos = this.storage.getAll() || [];
+            this.todos = this.todos.map(todo => {
                 todo.completed = todo.completed || false;
                 todo.deadline = new Date(todo.deadline);
 
                 return this.create(todo);
             });
         }
-        return [].concat(TodosService.todos);
+        return [].concat(this.todos);
     }
 
     private addTodo(todo: Todo): TodosService {
-        TodosService.storage.set(todo.id, todo);
-        if(!TodosService.todos) {
+        this.storage.set(todo.id, todo);
+        if(!this.todos) {
             this.getTodos();
         }
-        TodosService.todos.unshift(todo);
+        this.todos.unshift(todo);
         return this;
     }
 
     private updateTodo(todo: Todo): TodosService {
-        TodosService.storage.set(todo.id, todo);
+        this.storage.set(todo.id, todo);
         return this;
     }
 
@@ -64,8 +64,8 @@ export class TodosService {
 
     removeTodo(todo: Todo): TodosService {
         const id = todo.id;
-        TodosService.storage.remove(id);
-        TodosService.todos = TodosService.todos.filter(todo => {return todo.id !== id});
+        this.storage.remove(id);
+        this.todos = this.todos.filter(todo => {return todo.id !== id});
         return this;
     }
 }

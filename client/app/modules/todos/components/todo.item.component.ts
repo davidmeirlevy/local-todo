@@ -7,7 +7,6 @@ import {Todo} from '../models/todo';
 @Component({
     selector: 'todo-item',
     templateUrl: '/app/modules/todos/views/todo.item.view.html',
-    providers: [TodosService]
 })
 export class TodoItemComponent implements OnInit {
 

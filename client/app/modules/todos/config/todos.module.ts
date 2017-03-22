@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {TodosComponent} from '../components/todos.component';
 import {TodoItemComponent} from '../components/todo.item.component';
 import {routes} from './todos.routes';
+import {TodosService} from "../services/todos.service";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {routes} from './todos.routes';
     declarations: [
         TodosComponent,
         TodoItemComponent,
-    ]
+    ],
+    providers: [TodosService]
 })
 export class TodosModule {
 }
