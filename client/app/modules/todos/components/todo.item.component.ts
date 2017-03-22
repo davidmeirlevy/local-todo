@@ -40,7 +40,6 @@ export class TodoItemComponent implements OnInit {
         this.subject
             .filter($event => {return $event.keyCode === 27})
             .subscribe(() => this.editMode = false);
-
     }
 
     toggleCompleted(completed: boolean): void {

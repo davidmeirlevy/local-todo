@@ -27,11 +27,12 @@ export class TodosComponent implements OnInit {
     private subject = new Subject<any>();
 
     private loadTodos(): void {
-        this.todos = TodosComponent.getFilteredTodos(this.service.getTodos(), this.type);
+        this.filterTodos(this.service.getTodos());
     }
 
-    static getFilteredTodos(todos: Todo[], type): Todo[] {
-        return todos.filter(todo => {return (type === 'completed') ? todo.completed : !todo.completed});
+    private filterTodos(todos: Todo[]|undefined): Todo[] {
+        return this.todos = (todos || this.todos)
+            .filter(todo => {return (this.type === 'completed') ? todo.completed : !todo.completed});
     }
 
     ngOnInit() {
@@ -41,7 +42,7 @@ export class TodosComponent implements OnInit {
         this.subject
             .debounceTime(1000)
             .map(type => {return type === 'completed'})
-            .subscribe(() => this.todos = TodosComponent.getFilteredTodos(this.todos, this.type));
+            .subscribe(() => this.filterTodos());
 
         this.subject
             .filter(type => {return type === 'removed'})
