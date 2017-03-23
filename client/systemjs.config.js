@@ -10,8 +10,8 @@
     },
     // map tells the System loader where to look for things
     map: {
-      // our app is within the build folder
-      app: 'build',
+      // our src is within the build folder
+      src: 'build',
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
@@ -30,7 +30,7 @@
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
-        app: {
+        src: {
             main: './main.js',
             defaultExtension: 'js'
         },

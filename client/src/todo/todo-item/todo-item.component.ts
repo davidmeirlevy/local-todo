@@ -1,11 +1,11 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
-import {TodosService} from '../services/todos.service';
-import {Todo} from '../models/todo';
+import {TodoService} from '../todo.service';
+import {Todo} from '../../common/models/todo';
 
 @Component({
     selector: 'todo-item',
-    templateUrl: '/app/modules/todos/views/todo.item.view.html',
+    templateUrl: '/src/todo/todo-item/todo-item.component.html',
 })
 export class TodoItemComponent implements OnInit {
 
@@ -15,7 +15,7 @@ export class TodoItemComponent implements OnInit {
     public isNew: boolean;
     public editMode: boolean;
 
-    constructor (private service: TodosService){}
+    constructor (private service: TodoService){}
 
     ngOnInit() {
         this.isNew = !(this.todo && this.todo.id);

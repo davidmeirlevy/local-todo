@@ -5,8 +5,9 @@ import { DatepickerModule } from 'angular2-material-datepicker';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
-import {AppComponent} from '../components/app.component';
-import {TodosModule} from "../../todos/config/todos.module";
+import {AppComponent} from './app.component';
+import {TodoModule} from "../todo/todo.module";
+import {StorageService} from '../common/services/storage.service';
 
 
 @NgModule({
@@ -16,11 +17,12 @@ import {TodosModule} from "../../todos/config/todos.module";
         DatepickerModule,
         RouterModule.forRoot([]),
         FormsModule,
-        TodosModule
+        TodoModule
     ],
     declarations: [
         AppComponent
     ],
+    providers: [StorageService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

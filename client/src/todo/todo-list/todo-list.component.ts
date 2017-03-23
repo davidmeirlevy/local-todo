@@ -2,19 +2,19 @@ import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Subject} from "rxjs/Rx";
 
-import {TodosService} from '../services/todos.service';
-import {Todo} from '../models/todo';
+import {TodoService} from '../todo.service';
+import {Todo} from '../../common/models/todo';
 
 @Component({
     selector: 'todos',
-    templateUrl: '/app/modules/todos/views/todos.view.html',
+    templateUrl: '/src/todo/todo-list/todo-list.component.html',
 })
-export class TodosComponent implements OnInit {
+export class TodoListComponent implements OnInit {
 
     todos: Todo[];
     type: string;
 
-    constructor(private service: TodosService,
+    constructor(private service: TodoService,
                 private route: ActivatedRoute) {
 
         route.url

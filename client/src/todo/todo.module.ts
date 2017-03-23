@@ -5,11 +5,11 @@ import { DatepickerModule } from 'angular2-material-datepicker';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
-import {TodosComponent} from '../components/todos.component';
-import {TodoItemComponent} from '../components/todo.item.component';
-import {InputFocusDirective} from '../directives/input.focus.directive';
-import {routes} from './todos.routes';
-import {TodosService} from "../services/todos.service";
+import {TodoListComponent} from './todo-list/todo-list.component';
+import {TodoItemComponent} from './todo-item/todo-item.component';
+import {InputFocusDirective} from '../common/directives/input.focus.directive';
+import {routes} from './todo.routes';
+import {TodoService} from "./todo.service";
 
 
 @NgModule({
@@ -21,11 +21,11 @@ import {TodosService} from "../services/todos.service";
         RouterModule.forRoot(routes),
     ],
     declarations: [
-        TodosComponent,
+        TodoListComponent,
         TodoItemComponent,
         InputFocusDirective
     ],
-    providers: [TodosService]
+    providers: [TodoService]
 })
-export class TodosModule {
+export class TodoModule {
 }

@@ -1,38 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Todo} from "../models/todo";
-import {StorageService} from  '../../core/services/storage.service';
+import {Todo} from "../common/models/todo";
+import {StorageService} from  '../common/services/storage.service';
+import {STORAGE_DIRECTORY} from "./todo.defines";
 
 @Injectable()
-export class TodosService {
+export class TodoService {
 
-    private storage: StorageService;
     private todos: Todo[];
     private proxyHandler = {
         set: this.save.bind(this)
     };
 
-    constructor () {
-        this.storage = new StorageService('todos');
-    }
+    constructor (private storage: StorageService) {}
 
-    create(todo: Todo): Todo {
-        return new Proxy(todo, this.proxyHandler);
-    }
-
-    getTodos(): Todo[] {
-        if(!this.todos) {
-            this.todos = this.storage.getAll().map(todo => {
-                todo.completed = todo.completed || false;
-                todo.deadline = new Date(todo.deadline);
-
-                return this.create(todo);
-            });
-        }
-        return [...this.todos];
-    }
-
-    private addTodo(todo: Todo): TodosService {
-        this.storage.set(todo.id, todo);
+    private addTodo(todo: Todo): TodoService {
+        this.storage.set(STORAGE_DIRECTORY, todo.id, todo);
         if(this.todos) {
             this.todos.unshift(todo);
         } else {
@@ -41,11 +23,26 @@ export class TodosService {
         return this;
     }
 
-    private updateTodo(todo: Todo): TodosService {
-        this.storage.set(todo.id, todo);
+    private updateTodo(todo: Todo): TodoService {
+        this.storage.set(STORAGE_DIRECTORY, todo.id, todo);
         return this;
     }
 
+    create(todo: Todo): Todo {
+        return new Proxy(todo, this.proxyHandler);
+    }
+
+    getTodos(): Todo[] {
+        if(!this.todos) {
+            this.todos = this.storage.getAll(STORAGE_DIRECTORY).map(todo => {
+                todo.completed = todo.completed || false;
+                todo.deadline = new Date(todo.deadline);
+
+                return this.create(todo);
+            });
+        }
+        return [...this.todos];
+    }
 
     save(todo: Todo, prop: string = '', value: any): boolean {
         if(prop) {
@@ -60,9 +57,9 @@ export class TodosService {
         return true;
     }
 
-    removeTodo(todo: Todo): TodosService {
+    removeTodo(todo: Todo): TodoService {
         const id = todo.id;
-        this.storage.remove(id);
+        this.storage.remove(STORAGE_DIRECTORY, id);
         this.todos = this.todos.filter(todo => {return todo.id !== id});
         return this;
     }
