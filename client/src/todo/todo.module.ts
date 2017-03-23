@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '@angular/material';
-import { DatepickerModule } from 'angular2-material-datepicker';
+import {DatepickerModule} from 'angular2-material-datepicker';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 

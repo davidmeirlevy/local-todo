@@ -55,12 +55,7 @@ export class TodoListComponent implements OnInit {
     }
 
     addTodo(): void {
-        this.todos.unshift(this.service.create({
-            id: '',
-            content: '',
-            completed: false,
-            deadline: new Date()
-        }));
+        this.todos.unshift(this.service.create());
     }
 
 }
