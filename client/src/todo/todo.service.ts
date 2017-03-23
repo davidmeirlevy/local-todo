@@ -11,8 +11,7 @@ export class TodoService {
         set: this.save.bind(this)
     };
 
-    constructor(private storage: StorageService) {
-    }
+    constructor(private storage: StorageService) {}
 
     private addTodo(todo: Todo): TodoService {
         this.storage.set(STORAGE_DIRECTORY, todo.id, todo);
