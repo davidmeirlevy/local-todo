@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit {
                 () => this.loadTodos());
     }
 
-    private subject = new Subject<any>();
+    private subject = new Subject<string>();
 
     private loadTodos(): void {
         this.filterTodos(this.service.getTodos());
